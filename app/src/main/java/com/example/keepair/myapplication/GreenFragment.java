@@ -124,7 +124,8 @@ public class GreenFragment extends Fragment {
             }
         });
 
-        view.findViewById(R.id.btn_getgallery).setOnClickListener(new View.OnClickListener() {
+        mPostButton = (Button) view.findViewById(R.id.btn_getgallery);
+        mPostButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(ActivityCompat.checkSelfPermission(getActivity(),
@@ -203,7 +204,6 @@ public class GreenFragment extends Fragment {
         return resizedBitmap;
     }
 
-    // 5312 x 2988
     private float getSampleRatio(int width, int height) {
 
         final int targetWidth = 1280;
@@ -240,99 +240,4 @@ public class GreenFragment extends Fragment {
         String strDate = simpleDateFormat.format(date);
         return strDate + ".png";
     }
-
-
-   /* @OnClick(R.id.btn_post)
-    public void onClick(View view) {
-
-        Uri returnUri;
-        returnUri = getActivity().
-
-
-        Bitmap bitmap = getBitmapFromUri(returnUri);
-        File imageFile = createFileFromBitmap(bitmap);
-
-        RequestBody body = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("name", makeImageFileName() , RequestBody(MediaType.parse("image/png"), imageFile))
-                .build();
-        PostApiService.uploadFile(body);
-    }
-
-
-
-
-    private Bitmap getBitmapFromUri(Uri uri) throws IOException {
-        ParcelFileDescriptor parcelFileDescriptor =
-                getActivity().getContentResolver().openFileDescriptor(uri, "r");
-        FileDescriptor fileDescriptor = parcelFileDescriptor.getFileDescriptor();
-
-        BitmapFactory.Options opts = new BitmapFactory.Options();
-        opts.inJustDecodeBounds = true;
-        BitmapFactory.decodeFileDescriptor(fileDescriptor, null, opts);
-
-        int width = opts.outWidth;
-        int height = opts.outHeight;
-
-        float sampleRatio = getSampleRatio(width, height);
-
-        opts.inJustDecodeBounds = false;
-        opts.inSampleSize = (int) sampleRatio;
-
-        Bitmap resizedBitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor, null, opts);
-
-        Log.d("Resizing", "Resized Width / Height : " + resizedBitmap.getWidth() + "/" + resizedBitmap.getHeight());
-
-        parcelFileDescriptor.close();
-
-        return resizedBitmap;
-    }
-
-
-    // 5312 x 2988
-    private float getSampleRatio(int width, int height) {
-
-        final int targetWidth = 1280;
-        final int targetheight = 1280;
-
-        float ratio;
-
-        if (width > height) {
-            // Landscape
-            if (width > targetWidth) {
-                ratio = (float) width / (float) targetWidth;
-            } else ratio = 1f;
-        } else {
-            // Portrait
-            if (height > targetheight) {
-                ratio = (float) height / (float) targetheight;
-            } else ratio = 1f;
-        }
-
-        return Math.round(ratio);
-    }
-
-
-    private File createFileFromBitmap(Bitmap bitmap) throws IOException {
-
-        File newFile = new File(getActivity().getFilesDir(), makeImageFileName());
-
-        FileOutputStream fileOutputStream = new FileOutputStream(newFile);
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream);
-        fileOutputStream.close();
-
-
-        return newFile;
-    }
-
-
-
-    private String makeImageFileName() {
-
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd_hhmmss");
-        Date date = new Date();
-        String strDate = simpleDateFormat.format(date);
-        return strDate + ".png";
-    }*/
-
-}
+  }
