@@ -27,7 +27,6 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.Holder> {
     public FlowerAdapter(FlowerClickListener listener) {
 
         mFlowers = new ArrayList<>();
-
         mListener = listener;
     }
 
@@ -59,7 +58,10 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.Holder> {
 //        Log.d((String) TAG, flower.getImage());
         mFlowers.add(flower);
         notifyDataSetChanged();
-
+    }
+    public void clear(){
+        mFlowers.clear();
+        notifyDataSetChanged();
     }
 
     public Flower getSelectedFlower(int position) {
@@ -85,17 +87,11 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.Holder> {
 
         @Override
         public void onClick(View view) {
-
             mListener.onClick(getLayoutPosition());
-
-
-
         }
     }
 
     public interface FlowerClickListener {
-
         void onClick(int position);
-
     }
 }

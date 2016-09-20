@@ -1,39 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:weightSum="10"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.keepair.myapplication.MainActivity">
+    tools:context="com.example.keepair.myapplication.MainActivity"
+    android:orientation="vertical"
+    >
 
-    <FrameLayout
-        android:id="@+id/fragment_ex"
-        android:name="com.example.keepair.myapplication.RedFragment"
-        android:background="#515151"
+    <android.support.v4.view.ViewPager
         android:layout_weight="1"
+        android:id="@+id/vp_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:id="@+id/ll_croll"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
-
-    </FrameLayout>
-
-    <fragment
-        android:id="@+id/fragment_row"
+    <LinearLayout
         android:layout_weight="9"
-        android:layout_width="wrap_content"
+        android:weightSum="4"
+        android:orientation="horizontal"
+        android:id="@+id/tl_tabs"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.example.keepair.myapplication.RowFragment"
-        tools:layout="@layout/fragment_row"></fragment>
+        android:fillViewport="false" >
+
+        <View
+            android:id="@+id/btn_red"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <View
+            android:id="@+id/btn_blue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <View
+            android:id="@+id/btn_green"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <View
+            android:id="@+id/btn_yellow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
+<!--
+    <fragment
+        android:id="@+id/fragment_row"
+    android:layout_weight="9"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:name="com.example.keepair.myapplication.RowFragment"
+    tools:layout="@layout/fragment_row"></fragment>-->
+
