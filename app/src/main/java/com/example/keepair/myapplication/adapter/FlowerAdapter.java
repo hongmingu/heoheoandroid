@@ -51,11 +51,9 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.Holder> {
     @Override
     public int getItemCount() {
         return mFlowers.size();
-//        return mFlowers.size();
     }
 
     public void addFlower(Flower flower) {
-//        Log.d((String) TAG, flower.getImage());
         mFlowers.add(flower);
         notifyDataSetChanged();
     }

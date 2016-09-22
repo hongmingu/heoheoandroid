@@ -84,66 +84,12 @@ public class RedFragment extends Fragment implements FlowerAdapter.FlowerClickLi
 
     @Override
     public void onClick(int position) {
+
+        Flower selectedFlower = mFlowerAdapter.getSelectedFlower(position);
+        Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra(Constants.REFERENCE.FLOWER, selectedFlower);
+        startActivity(intent);
+
     }
 }
 
-//
-//    private void configViews() {
-//
-//        mRecyclerView = view.findViewById(R.id.rv_flower);
-//        mRecyclerView.setHasFixedSize(true);
-//        mRecyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-//
-//        mFlowerAdapter = new FlowerAdapter(this);
-//        mRecyclerView.setAdapter(mFlowerAdapter);
-//    }
-
-//    @Override
-//    public void onClick(int position) {
-//
-//        Flower selectedFlower = mFlowerAdapter.getSelectedFlower(position);
-//
-//        Intent intent = new Intent(getContext(), DetailActivity.class);
-//
-//        intent.putExtra(Constants.REFERENCE.FLOWER, selectedFlower);
-//        startActivity(intent);
-//
-//    }
-    /*
-        mRestManager = new RestManager();
-        Call<List<Flower>> listCall = mRestManager.getmFlowerApiService(getActivity()).getAllFlowers();
-        listCall.enqueue(new Callback<List<Flower>>() {
-            @Override
-            public void onResponse(Call<List<Flower>> call, Response<List<Flower>> response) {
-
-                if (response.isSuccessful()) {
-
-                    List<Flower> flowerList = response.body();
-
-                    for(int i =0; i<flowerList.size(); i++) {
-
-                        Flower flower = flowerList.get(i);
-
-                        mFlowerAdapter.addFlower(flower);
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Flower>> call, Throwable t) {
-            }
-        });*/
-
-//
-//    @Override
-//    public void onClick(int position) {
-//
-//        Flower selectedFlower = mFlowerAdapter.getSelectedFlower(position);
-//
-//        Intent intent = new Intent(getContext(), DetailActivity.class);
-//
-//        intent.putExtra(Constants.REFERENCE.FLOWER, selectedFlower);
-//        startActivity(intent);
-//
-//    }

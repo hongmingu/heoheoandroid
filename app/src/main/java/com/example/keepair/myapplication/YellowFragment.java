@@ -89,6 +89,7 @@ public class YellowFragment extends Fragment implements FlowerAdapter.FlowerClic
         Intent intent = new Intent(getContext(), DetailActivity.class);
         intent.putExtra(Constants.REFERENCE.FLOWER, selectedFlower);
         startActivity(intent);
+
     }
 }
 
