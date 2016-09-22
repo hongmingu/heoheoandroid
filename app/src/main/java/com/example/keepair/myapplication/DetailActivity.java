@@ -1,9 +1,11 @@
 package com.example.keepair.myapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,7 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.keepair.myapplication.helper.Constants;
 import com.example.keepair.myapplication.model.Flower;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends Activity {
 
     private ImageView mImage;
     private TextView mAuthor, mText;
@@ -19,6 +21,7 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_detail);
 
         Intent intent = getIntent();
