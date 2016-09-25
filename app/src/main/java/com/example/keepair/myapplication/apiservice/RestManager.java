@@ -26,7 +26,6 @@ public class RestManager {
             OkHttpClient client = new OkHttpClient();
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.interceptors().add(new AddCookiesInterceptor(mContext));
-//        builder.interceptors().add(new RecievedCookiesInterceptor(getApplicationContext()));
             client = builder.build();
 
             Retrofit retrofit = new Retrofit.Builder()

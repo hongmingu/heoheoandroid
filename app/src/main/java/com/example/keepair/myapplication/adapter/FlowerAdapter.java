@@ -42,9 +42,17 @@ public class FlowerAdapter extends RecyclerView.Adapter<FlowerAdapter.Holder> {
 
         Flower currFlower = mFlowers.get(position);
 
-        holder.mText.setText("$" + currFlower.getText());
+        holder.mAuthor.setText(currFlower.getAuthor());
 
-        Glide.with(holder.itemView.getContext()).load(currFlower.getImage()).into(holder.mImage);
+        holder.mText.setText(currFlower.getText());
+
+/*
+        Glide.with(holder.itemView.getContext())
+                .load(currFlower.getImage())
+                .override(300, 300)
+                .centerCrop()
+                .into(holder.mImage);
+*/
 
     }
 

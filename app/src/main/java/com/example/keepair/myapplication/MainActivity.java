@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment[] arrFragmnets = new Fragment[4];
         arrFragmnets[0] = new YellowFragment();
         arrFragmnets[1] = new RedFragment();
-        arrFragmnets[2] = new BlueFragment();
-        arrFragmnets[3] = new GreenFragment();
+        arrFragmnets[2] = new GreenFragment();
+        arrFragmnets[3] = new BlueFragment();
 
 
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), arrFragmnets);
@@ -46,33 +46,37 @@ public class MainActivity extends AppCompatActivity {
 
 
         btn_blue = (View) findViewById(R.id.btn_blue);
-        btn_blue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vp_pager.setCurrentItem(2);
-            }
-        });
-        btn_green = (View) findViewById(R.id.btn_green);
-        btn_green.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vp_pager.setCurrentItem(3);
-            }
-        });
         btn_red = (View) findViewById(R.id.btn_red);
-        btn_red.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vp_pager.setCurrentItem(1);
-            }
-        });
         btn_yellow = (View) findViewById(R.id.btn_yellow);
+        btn_green = (View) findViewById(R.id.btn_green);
+
         btn_yellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 vp_pager.setCurrentItem(0);
             }
         });
+        btn_red.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vp_pager.setCurrentItem(1);
+            }
+        });
+        btn_green.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vp_pager.setCurrentItem(2);
+            }
+        });
+        btn_blue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vp_pager.setCurrentItem(3);
+            }
+        });
+
+
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.

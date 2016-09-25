@@ -19,5 +19,5 @@ public interface PostApiService {
 
     @Multipart
     @POST("posts/")
-    Call<ResponseBody> uploadFile (@Part MultipartBody.Part part, @Part("point") RequestBody description);
+    Call<ResponseBody> uploadFile (@Part MultipartBody.Part part, @Part("point") RequestBody pointString, @Part("text") RequestBody textString);
 }

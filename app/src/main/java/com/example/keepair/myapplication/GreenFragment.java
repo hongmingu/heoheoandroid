@@ -2,6 +2,7 @@ package com.example.keepair.myapplication;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,9 +12,11 @@ import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +32,7 @@ import com.example.keepair.myapplication.apiservice.LoginApiService;
 import com.example.keepair.myapplication.apiservice.PostApiService;
 import com.example.keepair.myapplication.helper.Constants;
 import com.example.keepair.myapplication.loginhelper.AddCookiesInterceptor;
+import com.example.keepair.myapplication.loginhelper.ReferSharedPreference;
 import com.example.keepair.myapplication.model.Point;
 import com.example.keepair.myapplication.model.PostData;
 
@@ -59,73 +64,106 @@ import retrofit2.http.POST;
 public class GreenFragment extends Fragment {
 
 
-    Button mPostButton;
+    Button mGetImageFromGalleryButton;
 
     ImageView mImageview;
+    TextView mEditTextdialogOpenField;
+    Uri returnUri;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_green, container, false);
-
         mImageview = (ImageView) view.findViewById(R.id.iv_beforesendpost);
+        mEditTextdialogOpenField = (TextView) view.findViewById(R.id.tv_textToPost);
+        setRetainInstance(true);
+
+        mEditTextdialogOpenField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+            }
+        });
+
 
         view.findViewById(R.id.btn_post).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (returnUri != null) {
+                    if (!mEditTextdialogOpenField.getText().toString().equals("")) {
+                        Bitmap bitmap = null;
 
-                Bitmap bitmap = null;
-                try {
-                    bitmap = getBitmapFromUri(returnUri);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                File imageFile = null;
-                try {
-                    imageFile = createFileFromBitmap(bitmap);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                        try {
+                            bitmap = getBitmapFromUri(returnUri);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-                OkHttpClient client = new OkHttpClient();
-                OkHttpClient.Builder builder = new OkHttpClient.Builder();
-                builder.interceptors().add(new AddCookiesInterceptor(view.getContext()));
-                client = builder.build();
-                Retrofit retrofit = new Retrofit.Builder()
-                        .client(client)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .baseUrl(Constants.HTTP.BASE_URL)
-                        .build();
+                        File imageFile = null;
+                        try {
+                            imageFile = createFileFromBitmap(bitmap);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-                PostApiService postApiService = retrofit.create(PostApiService.class);
-                RequestBody requestFile =
-                        RequestBody.create(MediaType.parse("multipart/form-data"), imageFile);
-                MultipartBody.Part body =
-                        MultipartBody.Part.createFormData("image", makeImageFileName(), requestFile);
-                Point mpoint = new Point(13, 15);
-                PostData postData = new PostData("hello", mpoint);
+                        String givenText = mEditTextdialogOpenField.getText().toString();
+                        OkHttpClient client = new OkHttpClient();
+                        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+                        builder.interceptors().add(new AddCookiesInterceptor(view.getContext()));
+                        client = builder.build();
+                        Retrofit retrofit = new Retrofit.Builder()
+                                .client(client)
+                                .addConverterFactory(GsonConverterFactory.create())
+                                .baseUrl(Constants.HTTP.BASE_URL)
+                                .build();
 
-                String descriptionString = "{ \"longitude\": \"20.0\",     \"latitude\": \"20.0\" } ";
-                RequestBody description =
-                        RequestBody.create(
-                                MediaType.parse("multipart/form-data"), descriptionString);
+                        PostApiService postApiService = retrofit.create(PostApiService.class);
+                        RequestBody requestFile =
+                                RequestBody.create(MediaType.parse("multipart/form-data"), imageFile);
+                        MultipartBody.Part body =
+                                MultipartBody.Part.createFormData("image", makeImageFileName(), requestFile);
 
-                Call<ResponseBody> call = postApiService.uploadFile(body, description);
-                call.enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        Toast.makeText(getContext(), "success?", Toast.LENGTH_LONG).show();
+                        ReferSharedPreference preferenceCoordinates = new ReferSharedPreference(getContext());
+                        final String lat = preferenceCoordinates.getValue("Lat", "13");
+                        final String lon = preferenceCoordinates.getValue("Lon", "15");
+                        String pointString = "{ \"longitude\": \""+lon+"\",     \"latitude\": \""+lat+"\" } ";
+
+                        RequestBody coordinatePoint =
+                                RequestBody.create(
+                                        MediaType.parse("multipart/form-data"), pointString);
+                        RequestBody textToPost =
+                                RequestBody.create(
+                                        MediaType.parse("multipart/form-data"), givenText);
+
+
+                        Call<ResponseBody> call = postApiService.uploadFile(body, coordinatePoint, textToPost);
+                        call.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Snackbar.make(getView(), "Success, posted at \n" + lat + "  , " + lon , Snackbar.LENGTH_LONG).show();
+
+                            }
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            }
+                        });
+                        mImageview.setImageBitmap(null);
+                        returnUri = null;
+                        mEditTextdialogOpenField.setText("");
                     }
-                    @Override
-                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    else {
+                        Snackbar.make(getView(), "Hi, You have to say any words", Snackbar.LENGTH_LONG).show();
                     }
-                });
+                }
+                else {
+                    Snackbar.make(getView(), "Hi, You have to get any image from gallery", Snackbar.LENGTH_LONG).show();
+                }
             }
         });
 
-        mPostButton = (Button) view.findViewById(R.id.btn_getgallery);
-        mPostButton.setOnClickListener(new View.OnClickListener() {
+        mGetImageFromGalleryButton = (Button) view.findViewById(R.id.btn_getgallery);
+        mGetImageFromGalleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(ActivityCompat.checkSelfPermission(getActivity(),
@@ -142,6 +180,33 @@ public class GreenFragment extends Fragment {
         });
         return view;
     }
+
+    private void openDialog() {
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        View subView = inflater.inflate(R.layout.dialog_layout, null);
+        final EditText subEditText = (EditText) subView.findViewById(R.id.dialogEditText);
+        subEditText.setText(mEditTextdialogOpenField.getText().toString());
+        subEditText.setSelection(subEditText.length());
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Text to Post");
+        builder.setView(subView);
+        AlertDialog alertDialog = builder.create();
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                mEditTextdialogOpenField.setText(subEditText.getText().toString());
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Snackbar.make(getView(), "Cancel", Snackbar.LENGTH_LONG).show();
+            }
+        });
+        builder.show();
+    }
+
 
     private void startGallery() {
         Intent cameraIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -164,18 +229,17 @@ public class GreenFragment extends Fragment {
                 }
                 mImageview.setImageBitmap(bitmapImage);
             }
+            returnUri = data.getData();
+            Glide.with(this)
+                    .load(returnUri)
+                    .override(1280, 1280)
+                    .centerCrop()
+                    .crossFade()
+                    .into(mImageview);
         }
 
-        returnUri = data.getData();
-        Glide.with(this)
-                .load(returnUri)
-                .override(1280, 1280)
-                .centerCrop()
-                .crossFade()
-                .into(mImageview);
-
     }
-    Uri returnUri;
+
 
 
     private Bitmap getBitmapFromUri(Uri uri) throws IOException {
@@ -196,11 +260,8 @@ public class GreenFragment extends Fragment {
         opts.inSampleSize = (int) sampleRatio;
 
         Bitmap resizedBitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor, null, opts);
-
         Log.d("Resizing", "Resized Width / Height : " + resizedBitmap.getWidth() + "/" + resizedBitmap.getHeight());
-
         parcelFileDescriptor.close();
-
         return resizedBitmap;
     }
 

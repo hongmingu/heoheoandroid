@@ -39,18 +39,19 @@
             android:background="#ff0000"/>
 
         <View
+            android:id="@+id/btn_green"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#00ff00"/>
+
+        <View
             android:id="@+id/btn_blue"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#0004ff"/>
 
-        <View
-            android:id="@+id/btn_green"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="#00ff00"/>
 
 
     </LinearLayout>

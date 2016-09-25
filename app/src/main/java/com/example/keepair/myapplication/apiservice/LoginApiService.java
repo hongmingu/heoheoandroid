@@ -17,13 +17,6 @@ public interface LoginApiService {
 
     String string = "client_Id";
 
-
-    @GET("comments")
-    Call<ResponseBody> getComment(@Query("postId")int postId);
-
-//    @POST("posts/")
-//    Call<ResponseBody> gettest(@Body TextData textData);
-
     @POST("rest-auth/login/")
     Call<MyKey> getget(@Body LoginData loginData);
 }

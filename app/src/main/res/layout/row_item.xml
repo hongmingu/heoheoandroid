@@ -1,28 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="10dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/tv_author" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:gravity="left"
         android:text="Medium Text"
-        android:id="@+id/tv_text" />
+        android:id="@+id/tv_author"
+        android:textSize="16dp"
+        android:textStyle="bold"/>
 
-    <ImageView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Large Text"
-        android:id="@+id/iv_photo"
-        android:layout_gravity="center_horizontal" />
+        android:layout_below="@id/tv_author"
+        android:text="Small Text"
+        android:id="@+id/tv_text"
+        android:textSize="14dp"
+        android:maxLines="1"
+        android:paddingBottom="10dp"/>
 
-</LinearLayout>
+    <View
+        android:layout_below="@id/tv_text"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#2f47e2"/>
+
+</RelativeLayout>

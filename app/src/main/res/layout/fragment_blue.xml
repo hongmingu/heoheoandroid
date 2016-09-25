@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0004ff"
-    android:id="@+id/map_blue">
+    >
 
-</com.google.android.gms.maps.MapView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:maxLines="1"
+            android:id="@+id/tv_coordinates_map"/>
+
+    </RelativeLayout>
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map_blue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.google.android.gms.maps.MapView>
+
+</LinearLayout>
