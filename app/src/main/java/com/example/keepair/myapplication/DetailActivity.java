@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -18,7 +19,7 @@ import com.example.keepair.myapplication.model.Flower;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class DetailActivity extends Activity {
+public class DetailActivity extends FragmentActivity {
 
     private ImageView mImage;
     private TextView mAuthor, mText;

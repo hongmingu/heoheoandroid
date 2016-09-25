@@ -16,14 +16,10 @@ import retrofit2.http.Part;
 public interface RegistrationApiService {
 
 
-    @POST("rest-auth/registration/")
-    Call<MyKey> register(@Body RegistrationData registrationData);
 
 
     @Multipart
     @POST("rest-auth/registration/")
     Call<ResponseBody> registersecond (@Part("username") RequestBody username, @Part("email") RequestBody email, @Part("password1") RequestBody password1, @Part("password2") RequestBody password2);
 
-    @POST("rest-auth/registration/")
-    Call<ResponseBody> registration (@Body RegistrationData registrationData);
 }

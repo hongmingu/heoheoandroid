@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -28,7 +29,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RegistrationActivity extends Activity {
+public class RegistrationActivity extends FragmentActivity {
     MyKey keygoven;
 
     RegistrationApiService mRegistrationApiService;
