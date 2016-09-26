@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -42,10 +43,10 @@ public class LoginActivity extends FragmentActivity {
     EditText mPasswordTextField;
 
     @Bind(R.id.loginButton)
-    Button mLoginButton;
+    ImageView mLoginButton;
 
     @Bind(R.id.btn_start_RegistrationActivity)
-    Button mStartRegistrationButton;
+    ImageView mStartRegistrationButton;
 
     @Bind(R.id.layout_Login)
     RelativeLayout mLayoutLogin;
@@ -95,7 +96,7 @@ public class LoginActivity extends FragmentActivity {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(Constants.Login_API_URL)
+                .baseUrl(Constants.BASE_URL)
                 .build();
 
         loginApiService = retrofit.create(LoginApiService.class);

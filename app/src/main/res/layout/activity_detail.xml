@@ -20,21 +20,33 @@
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:id="@+id/iv_photo_detail"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"/>
 
         <TextView
             android:layout_below="@id/iv_photo_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
-            android:id="@+id/tv_author_detail" />
+            android:textSize="20dp"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_author_detail"
+            android:layout_marginBottom="30dp"/>
 
         <TextView
             android:layout_below="@id/tv_author_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
+            android:textSize="16dp"
+            android:layout_marginLeft="10dp"
             android:id="@+id/tv_text_detail" />
+
+        <TextView
+            android:layout_below="@id/tv_text_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12dp"
+            android:layout_alignParentRight="true"
+            android:id="@+id/tv_time_detail"/>
 
     </RelativeLayout>
 

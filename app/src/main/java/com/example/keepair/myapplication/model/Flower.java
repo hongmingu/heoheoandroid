@@ -22,35 +22,8 @@ public class Flower implements Serializable {
     @Expose
     private Point point;
 
-    public class Point implements Serializable {
-        @Expose
-        private double longitude;
-        @Expose
-        private double latitude;
-        public Point(double longitude, double latitude) {
-            this.longitude = longitude;
-            this.latitude = latitude;
-        }
-        public double getLongitude() {
-            return longitude;
-        }
-        public void setLongitude(double longitude) {
-            this.longitude = longitude;
-        }
-        public double getLatitude() {
-            return latitude;
-        }
-        public void setLatitude(double latitude) {
-            this.latitude = latitude;
-        }
-    }
-
-    public Flower(String author, String text, String image, Point point) {
-        this.author = author;
-        this.text = text;
-        this.image = image;
-        this.point = point;
-    }
+    @Expose
+    private String created_date;
 
     public String getAuthor() {
         return author;
@@ -83,4 +56,46 @@ public class Flower implements Serializable {
     public void setPoint(Point point) {
         this.point = point;
     }
+
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public Flower(String author, String text, String image, Point point, String created_date) {
+
+        this.author = author;
+        this.text = text;
+        this.image = image;
+        this.point = point;
+        this.created_date = created_date;
+    }
+
+    public class Point implements Serializable {
+        @Expose
+        private double longitude;
+        @Expose
+        private double latitude;
+        public Point(double longitude, double latitude) {
+            this.longitude = longitude;
+            this.latitude = latitude;
+        }
+        public double getLongitude() {
+            return longitude;
+        }
+        public void setLongitude(double longitude) {
+            this.longitude = longitude;
+        }
+        public double getLatitude() {
+            return latitude;
+        }
+        public void setLatitude(double latitude) {
+            this.latitude = latitude;
+        }
+    }
+
+
 }

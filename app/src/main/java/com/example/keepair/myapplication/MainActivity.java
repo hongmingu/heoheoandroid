@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.example.keepair.myapplication.adapter.MyPagerAdapter;
 import com.google.android.gms.appindexing.Action;
@@ -18,10 +19,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 public class MainActivity extends FragmentActivity {
 
-    private View btn_red;
-    private View btn_blue;
-    private View btn_yellow;
-    private View btn_green;
+    private ImageView btn_red;
+    private ImageView btn_blue;
+    private ImageView btn_yellow;
+    private ImageView btn_green;
 
     private ViewPager vp_pager;
 
@@ -46,10 +47,10 @@ public class MainActivity extends FragmentActivity {
         vp_pager.setAdapter(adapter);
 
 
-        btn_blue = (View) findViewById(R.id.btn_blue);
-        btn_red = (View) findViewById(R.id.btn_red);
-        btn_yellow = (View) findViewById(R.id.btn_yellow);
-        btn_green = (View) findViewById(R.id.btn_green);
+        btn_blue = (ImageView) findViewById(R.id.btn_blue);
+        btn_red = (ImageView) findViewById(R.id.btn_red);
+        btn_yellow = (ImageView) findViewById(R.id.btn_yellow);
+        btn_green = (ImageView) findViewById(R.id.btn_green);
 
         btn_yellow.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Let's Login"
+        android:text="Pinair"
         android:id="@+id/loginLabel"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -22,6 +22,7 @@
         android:textColor="#000000" />
 
     <EditText
+        android:layout_marginTop="160dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/usernameTextField"
@@ -32,18 +33,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/passwordTextField"
+        android:inputType="textPassword"
         android:layout_below="@+id/usernameTextField"
         android:hint="Password" />
 
-    <Button
+    <ImageView
+        android:src="@drawable/acceptlight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Login"
         android:id="@+id/loginButton"
         android:layout_below="@+id/passwordTextField"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"/>
 
-    <Button
+    <ImageView
+        android:src="@drawable/registergogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"

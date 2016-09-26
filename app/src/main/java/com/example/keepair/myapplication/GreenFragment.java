@@ -17,6 +17,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDialogFragment;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -64,7 +66,7 @@ import retrofit2.http.POST;
 public class GreenFragment extends Fragment {
 
 
-    Button mGetImageFromGalleryButton;
+    ImageView mGetImageFromGalleryButton;
 
     ImageView mImageview;
     TextView mEditTextdialogOpenField;
@@ -115,7 +117,7 @@ public class GreenFragment extends Fragment {
                         Retrofit retrofit = new Retrofit.Builder()
                                 .client(client)
                                 .addConverterFactory(GsonConverterFactory.create())
-                                .baseUrl(Constants.HTTP.BASE_URL)
+                                .baseUrl(Constants.BASE_URL)
                                 .build();
 
                         PostApiService postApiService = retrofit.create(PostApiService.class);
@@ -162,7 +164,7 @@ public class GreenFragment extends Fragment {
             }
         });
 
-        mGetImageFromGalleryButton = (Button) view.findViewById(R.id.btn_getgallery);
+        mGetImageFromGalleryButton = (ImageView) view.findViewById(R.id.btn_getgallery);
         mGetImageFromGalleryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -187,7 +189,7 @@ public class GreenFragment extends Fragment {
         final EditText subEditText = (EditText) subView.findViewById(R.id.dialogEditText);
         subEditText.setText(mEditTextdialogOpenField.getText().toString());
         subEditText.setSelection(subEditText.length());
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.myDialog));
         builder.setTitle("Text to Post");
         builder.setView(subView);
         AlertDialog alertDialog = builder.create();

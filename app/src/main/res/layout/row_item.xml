@@ -11,7 +11,9 @@
         android:text="Medium Text"
         android:id="@+id/tv_author"
         android:textSize="16dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:layout_marginBottom="4dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -21,12 +23,14 @@
         android:id="@+id/tv_text"
         android:textSize="14dp"
         android:maxLines="1"
-        android:paddingBottom="10dp"/>
+        android:paddingBottom="14dp"/>
 
     <View
         android:layout_below="@id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#2f47e2"/>
+        android:background="#cf0003"/>
+
+
 
 </RelativeLayout>

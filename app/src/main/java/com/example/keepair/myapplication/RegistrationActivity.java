@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -36,7 +37,7 @@ public class RegistrationActivity extends FragmentActivity {
     EditText mUsernameRegistrationEditText;
     EditText mPasswordRegistration1EditText;
     EditText mPasswordRegistration2EditText;
-    Button mRegisterButton;
+    ImageView mRegisterButton;
     RelativeLayout mLayoutRegstration;
 
     ReferSharedPreference mSavedUserInfo;
@@ -60,7 +61,7 @@ public class RegistrationActivity extends FragmentActivity {
         mUsernameRegistrationEditText = (EditText) findViewById(R.id.et_username_registration);
         mPasswordRegistration1EditText = (EditText) findViewById(R.id.et_password_registration_1);
         mPasswordRegistration2EditText = (EditText) findViewById(R.id.et_password_registration_2);
-        mRegisterButton = (Button) findViewById(R.id.btn_registration);
+        mRegisterButton = (ImageView) findViewById(R.id.btn_registration);
         mLayoutRegstration = (RelativeLayout) findViewById(R.id.layoutRegistration);
 
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +72,7 @@ public class RegistrationActivity extends FragmentActivity {
                 String givenRegistrationPassword2 = mPasswordRegistration2EditText.getText().toString();
                 String givenEmail = "";
 
-                if(givenRegistrationUserName.length() >= 6){
+                if(givenRegistrationUserName.length() >= 3){
                     if(givenRegistrationPassword1.equals(givenRegistrationPassword2)){
                         if(givenRegistrationPassword1.length() >= 8){
                             OkHttpClient client = new OkHttpClient();
@@ -81,7 +82,7 @@ public class RegistrationActivity extends FragmentActivity {
                             Retrofit retrofit = new Retrofit.Builder()
                                     .client(client)
                                     .addConverterFactory(GsonConverterFactory.create())
-                                    .baseUrl(Constants.Login_API_URL)
+                                    .baseUrl(Constants.BASE_URL)
                                     .build();
 
                             mRegistrationApiService = retrofit.create(RegistrationApiService.class);

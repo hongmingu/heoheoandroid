@@ -5,12 +5,8 @@ package com.example.keepair.myapplication.helper;
  */
 public class Constants {
 
-    public static String Login_API_URL = "http://ec2-52-78-138-143.ap-northeast-2.compute.amazonaws.com:8000/";
+    public static String BASE_URL = "http://ec2-52-78-138-143.ap-northeast-2.compute.amazonaws.com:8000/";
 
-    public static class HTTP {
-
-        public static final String BASE_URL = "http://ec2-52-78-138-143.ap-northeast-2.compute.amazonaws.com:8000/";
-    }
 
     public static final class REFERENCE {
 

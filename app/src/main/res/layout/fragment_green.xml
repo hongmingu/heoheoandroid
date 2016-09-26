@@ -5,22 +5,26 @@
     >
 
 
-    <Button
+    <ImageView
+        android:src="@drawable/picturedark"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Picture"
         android:id="@+id/btn_getgallery"
         android:layout_gravity="center_horizontal" />
 
     <ImageView
+        android:layout_marginTop="10dp"
         android:layout_below="@id/btn_getgallery"
         android:id="@+id/iv_beforesendpost"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="320dp" />
 
     <TextView
-        android:background="#f1a2a2"
+        android:layout_marginTop="6dp"
+        android:background="#ba5252"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:layout_below="@id/iv_beforesendpost"
@@ -42,13 +46,15 @@
         android:maxLength="2000"/>-->
 
 
-    <Button
+    <ImageView
+        android:src="@drawable/acceptdark"
         android:id="@+id/btn_post"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/tv_textToPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Post" />
+        android:text="Post"
+        />
 
 
 </RelativeLayout>
